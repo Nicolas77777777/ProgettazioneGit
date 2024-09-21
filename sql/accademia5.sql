@@ -8,7 +8,9 @@ where p.nome= 'Pegasus'
 
 select distinct persona.id , persona.nome, persona.cognome, persona.posizione, progetto.nome
 from progetto, attivitaprogetto, persona
-where progetto.nome = 'Pegasus'
+where progetto.nome = 'Pegasus'cc
+
+
 
 
 
