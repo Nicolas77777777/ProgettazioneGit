@@ -31,15 +31,29 @@ CREATE TABLE Persona (
     cognome  StringaM   NOT NULL, 
     posizione Strutturato  NOT NULL,
     stipendio Denaro   NOT NULL)
-    (id) PRIMARY KEY
+    (id) PRIMARY KEY;
 
-Progetto (id: PosInteger, nome: StringaM, inizio: date, fine: date, budget:
-Denaro)
-[VincoloDB.1] altra chiave: (nome)
-[VincoloDB.2] ennupla: inizio < fine
-WP (progetto: PosInteger, id: PosInteger, nome: StringaM, inizio: date, fine:
-date)
-[VincoloDB.3] ennupla: inizio < fine
+CREATE TABLE Progetto 
+(id PosInteger  NOT NULL,
+ nome StringaM NOT NULL, 
+ inizio date NOT NULL, 
+ fine date NOT NULL, 
+ budget Denaro NOT NULL,)
+check inizio < fine
+PRIMARY KEY (id)
+unique (nome);
+ 
+
+CREATE WP 
+(progetto PosInteger  NOT NULL,
+id PosInteger NOT NULL, 
+nome StringaM NOT NULL, 
+inizio date NOT NULL, 
+fine date NOT NULL)
+CHECK inizio < fine
+PRIMARY KEY (id)
+unique (progetto)
+
 [VincoloDB.4] altra chiave: (progetto, nome)
 [VincoloDB.5] foreign key: progetto references Progetto(id)
 AttivitaProgetto (id: PosInteger, persona: PosInteger, progetto: PosInteger,
