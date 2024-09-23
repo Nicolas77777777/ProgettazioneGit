@@ -10,6 +10,8 @@ select distinct persona.id , persona.nome, persona.cognome, persona.posizione, p
 from progetto, attivitaprogetto, persona
 where progetto.nome = 'Pegasus'
 
+select distinct
+
 
 
 
