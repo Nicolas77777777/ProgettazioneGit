@@ -1,8 +1,11 @@
 create type Ruolo as 
-enum ('Paziente', 'Dottore')
+enum ('Paziente', 'Dottore','Venditore','Cliente')
 
-create type Farmaco as 
-enum ('Antibiotici', '')
+create type tipoRicetta as 
+enum ('Bianca', 'Rossa')
+
+create type Farmaco as
+enum ('')
 
 
 

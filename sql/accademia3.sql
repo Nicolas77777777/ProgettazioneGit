@@ -30,39 +30,65 @@ CREATE TABLE Persona (
     nome StringaM  NOT NULL ,
     cognome  StringaM   NOT NULL, 
     posizione Strutturato  NOT NULL,
-    stipendio Denaro   NOT NULL)
+    stipendio Denaro   NOT NULL
     (id) PRIMARY KEY;
+);
 
 CREATE TABLE Progetto 
 (id PosInteger  NOT NULL,
  nome StringaM NOT NULL, 
  inizio date NOT NULL, 
  fine date NOT NULL, 
- budget Denaro NOT NULL,)
+ budget Denaro NOT NULL,
 check inizio < fine
 PRIMARY KEY (id)
-unique (nome);
+unique (nome)
+);
  
 
-CREATE WP 
+CREATE TABLE WP 
 (progetto PosInteger  NOT NULL,
 id PosInteger NOT NULL, 
 nome StringaM NOT NULL, 
 inizio date NOT NULL, 
-fine date NOT NULL)
+fine date NOT NULL
 CHECK inizio < fine
-PRIMARY KEY (id)
-unique (progetto)
+PRIMARY KEY (progetto,id)
+UNIQUE (progetto,nome)
+foreign key: progetto references Progetto(id) deferrable
+);
 
-[VincoloDB.4] altra chiave: (progetto, nome)
-[VincoloDB.5] foreign key: progetto references Progetto(id)
-AttivitaProgetto (id: PosInteger, persona: PosInteger, progetto: PosInteger,
-wp: PosInteger, giorno: date, tipo: LavoroProgetto, oreDurata: NumeroOre)
-[VincoloDB.6] foreign key: persona references Persona(id)
-[VincoloDB.7] foreign key: (progetto, wp) references WP(progetto, id)
-AttivitaNonProgettuale (id: PosInteger, persona: PosInteger, tipo: Lavoro-
-NonProgettuale, giorno: date, oreDurata: NumeroOre)
-[VincoloDB.8] foreign key: persona references Persona(id)
-Assenza (id: PosInteger, persona: PosInteger, tipo: CausaAssenza, giorno: date)
-[VincoloDB.9] altra chiave: persona, giorno
-[VincoloDB.10] foreign key: persona references Persona(id)
+CREATE TABLE AttivitaProgetto 
+(id PosInteger NOT NULL, 
+persona PosInteger NOT NULL, 
+progetto PosInteger NOT NULL,
+wp PosInteger NOT NULL,
+giorno date NOT NULL, 
+tipo LavoroProgetto NOT NULL, 
+oreDurata NumeroOre NOT NULL
+PRIMARY KEY (id),
+foreign key (persona) references Persona(id),
+foreign key: (progetto, wp) references WP(progetto, id) deferrable
+);
+
+create table AttivitaNonProgettuale (
+  id PosInteger not null,
+  persona PosInteger not null,
+  tipo LavoroNonProgettuale not null,
+  giorno date not null,
+  oreDurata NumeroOre not null,
+  primary key (id),
+  foreign key (persona) references Persona(id) deferrable
+);
+
+create table Assenza (
+  id PosInteger not null,
+  persona PosInteger not null,
+  tipo CausaAssenza not null,
+  giorno date not null,
+  primary key (id),
+  unique (persona, giorno),
+  foreign key (persona) references Persona(id) deferrable
+);
+
+
