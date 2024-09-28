@@ -35,43 +35,18 @@ from WP
 order by nome asc
 
 --8. Quali sono (distinte) le cause di assenza di tutti gli strutturati?
+SELECT DISTINCT tipo
+FROM assenza
+
 --9. Quali sono (distinte) le tipologie di attività di progetto di tutti gli strutturati?
+SELECT DISTINCT tipo
+FROM persona, attivitaprogetto
+
 --10. Quali sono i giorni distinti nei quali del personale ha effettuato attività non progettuali
 --di tipo ‘Didattica’? Dare il risultato in ordine crescente.
+SELECT DISTINCT giorno
+FROM attivitanonprogettuale
+WHERE tipo = 'Didattica'
+order  by giorno asc
 
-
-
-
-
---3
-select id,cognome
-from persona 
-where posizione = 'Professore Associato' and cognome like 'V%'
-
---4 
-select id,cognome
-from persona 
-where posizione = 'Professore Associato' and cognome like 'V%' or posizione = 'Professore Ordinario' and cognome like 'V%'
-
---5
-select *
-from progetto
-where fine < CURRENT_DATE; 
-
---6
-select nome
-FROM progetto
-order by inizio asc;
-
---7
-selct nome
-from wp
-order by nome;
-
---8 
-select distinct tipo
-from assenza
-
---9 
-select distinct tipo 
 
