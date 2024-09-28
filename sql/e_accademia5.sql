@@ -17,10 +17,25 @@ order by p.cognome desc;
 
 --3. Quali sono il nome, il cognome e la posizione degli strutturati che hanno più di
 --una attività nel progetto ‘Pegasus’?
+select distinct persona.nome, persona.cognome, persona.posizione
+from Persona , Progetto , AttivitaProgetto as a1 , AttivitaProgetto as a2
+where Persona.id = a1.persona and Persona.id = a2.persona and
+Progetto.id = a1.Progetto and Progetto.id = a2.progetto and
+Progetto.nome = 'Pegasus' and
+a1.id <> a2.id ;
+
 --4. Quali sono il nome, il cognome e la posizione dei Professori Ordinari che hanno
 --fatto almeno una assenza per malattia?
+Select p.nome, p.cognome, p.posizione
+from persona as p, assenza as a
+where a.persona = p.id and 
+p.posizione = 'Professore Ordinario'
+and a.tipo ='Malattia';
+
 --5. Quali sono il nome, il cognome e la posizione dei Professori Ordinari che hanno
 --fatto più di una assenza per malattia?
+
+
 --6. Quali sono il nome, il cognome e la posizione dei Ricercatori che hanno almeno
 --un impegno per didattica?
 --7. Quali sono il nome, il cognome e la posizione dei Ricercatori che hanno più di un
@@ -39,20 +54,6 @@ order by p.cognome desc;
 --12. Quali sono i WP che hanno lo stesso nome, ma appartengono a progetti diversi?
 
 
-
-select wp.nome, wp.inizio, wp.fine
-from progetto p, WP wp
-where p.nome= 'Pegasus'
-	and wp.progetto = p.id;
-
--- Quali sono il nome, il cognome e la posizione degli strutturati che hanno almeno
--- una attività nel progetto ‘Pegasus’, ordinati per cognome decrescente?
-
-select distinct persona.id , persona.nome, persona.cognome, persona.posizione, progetto.nome
-from progetto, attivitaprogetto, persona
-where progetto.nome = 'Pegasus'
-
-select distinct
 
 
 
