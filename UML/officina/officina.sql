@@ -48,3 +48,10 @@ CREATE TABLE Cliente(
 
 );
 
+CREATE TABLE Riparazione (
+    riconsegna TIMESTAMP
+    codice INTEGER PRIMARY KEY
+);
+
+
+
